@@ -1,5 +1,12 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
+  <div>
+    <van-button type="primary">主要按钮</van-button>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'Home',
+  
+}
+</script>
