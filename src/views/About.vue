@@ -5,8 +5,12 @@
 </template>
 
 <script>
+import userApi from '../service/UserApi';
 export default {
   name: 'Home',
   
+  created() {
+    userApi.getUser()
+  }
 }
 </script>
