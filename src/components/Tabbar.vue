@@ -20,11 +20,10 @@ export default {
   methods: {
     onChange(index) {
       if (sessionStorage.getItem("token") == null) {
-        this.$router.push({ path: "/login?toPage=/" + index});
+        this.$router.push({ path: "/login?toPage=/" + index });
       } else {
-        console.log("dsa")
+        this.$router.push("/" + index);
       }
-      console.log(index);
     },
   },
 };

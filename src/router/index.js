@@ -43,6 +43,22 @@ const routes = [
       title: '注册',
     },
     component: () => import('../views/Register.vue')
+  },
+  {
+    path: '/message',
+    name: 'Message',
+    meta: {
+      title: '消息',
+    },
+    component: () => import('../views/Message.vue')
+  },
+  {
+    path: '/idle',
+    name: 'Idle',
+    meta: {
+      title: '发布闲置',
+    },
+    component: () => import('../views/Idle.vue')
   }
 ]
 
