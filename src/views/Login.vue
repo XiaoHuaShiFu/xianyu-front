@@ -1,14 +1,8 @@
 <template>
-
   <div id="base" class>
     <!-- 内容框架 (动态面板) -->
     <div id="u0" class="ax_default" data-label="内容框架">
-      
-    <van-nav-bar
-      left-text="返回"
-      left-arrow
-       @click-left="onClickLeft"
-    />
+      <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
       <div id="u0_state0" class="panel_state" data-label="State1" style>
         <div id="u0_state0_content" class="panel_state_content">
           <!-- Unnamed (图像 ) -->
@@ -136,14 +130,13 @@
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
 <script>
 import login from "../service/Login";
 import UserApi from "../service/UserApi";
-import { Notify} from "vant";
+import { Notify } from "vant";
 export default {
   data() {
     return {
@@ -158,6 +151,9 @@ export default {
     toRegister() {
       this.$router.push("/register");
     },
+    /**
+     * 返回上一页
+     */
     onClickLeft() {
       this.$router.push("/home");
     },
@@ -191,8 +187,5 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "/files/登入/styles.css";
-@import "/data/styles.css";
-@import "/resources/css/axure_rp_page.css";
+<style scoped src="../../public/files/登入/styles.css">
 </style>

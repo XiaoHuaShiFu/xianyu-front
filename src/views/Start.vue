@@ -51,8 +51,6 @@ export default {
 };
 </script>
 
-<style scoped>
-@import "/files/启动/styles.css";
-@import "/data/styles.css";
-@import "/resources/css/axure_rp_page.css";
+<style scoped src="../../public/files/启动/styles.css">
+
 </style>
