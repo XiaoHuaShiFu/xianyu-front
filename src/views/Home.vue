@@ -1,24 +1,20 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-    
+  <div>
+    <Tabbar :active="active"></Tabbar>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import axios from 'axios';
+import Tabbar from "@/components/Tabbar.vue";
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      active: "home",
+    };
   },
-  created() {
-    axios.get("/data.json").then((res)=> {
-      console.log(res)
-    })
-  } 
-}
+  components: {
+    Tabbar
+  },
+  created() {},
+};
 </script>

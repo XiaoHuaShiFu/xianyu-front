@@ -1,9 +1,8 @@
 import axios from 'axios'
 import service from './Api'
-import ViewUI from 'view-design'; // 得换成vant的组件
 
 let instance = axios.create({
-    baseURL: 'http://106.13.201.182:8080',
+    baseURL: 'https://api.xiaohuashifu.top',
     timeout: 100000
 })
 
@@ -69,22 +68,22 @@ for (let key in service) {
 instance.interceptors.request.use(config=>{
     // 添加token
     config.headers.Authorization = sessionStorage['token'];
-    ViewUI.LoadingBar.start();
+    // ViewUI.LoadingBar.start();
     return config
 }, (response)=>{
     // 请求错误
-    ViewUI.LoadingBar.finish();
+    // ViewUI.LoadingBar.finish();
     return response
 })
 
 // 响应拦截器
 instance.interceptors.response.use(res=>{
     // 请求成功
-    ViewUI.LoadingBar.finish();
+    // ViewUI.LoadingBar.finish();
     return res
 }, (response)=>{
     // 请求错误
-    ViewUI.LoadingBar.finish();
+    // ViewUI.LoadingBar.finish();
     
     response.status = response.response.status
     response.data = response.response.data

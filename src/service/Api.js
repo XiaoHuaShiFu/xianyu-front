@@ -22,9 +22,43 @@ const APIS = {
         method: 'put',
         url: '/v1/users'
     },
-    putUser: {
+    putUserAvatar: {
         method: 'put',
         url: '/v1/users/avatars'
+    },
+
+    // idle
+    postIdle: {
+        method: 'post',
+        url: '/v1/idles'
+    },
+    getIdle: {
+        method: 'get',
+        url: '/v1/idles'
+    },
+    listIdles: {
+        method: 'get',
+        url: '/v1/idles'
+    },
+    putIdle: {
+        method: 'put',
+        url: '/v1/idles'
+    },
+
+    // search
+    searchIdles: {
+        method: 'get',
+        url: '/v1/search/idles'
+    },
+    searchUsers: {
+        method: 'get',
+        url: '/v1/search/users'
+    },
+
+    // recommendation
+    recommendationUsers: {
+        method: 'get',
+        url: '/v1/recommendation/idles'
     },
 }
 
