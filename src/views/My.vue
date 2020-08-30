@@ -135,7 +135,7 @@
           <!-- Unnamed (SVG) -->
           <div id="u154" class="ax_default image">
             <img id="u154_img" class="img" src="images/我的/u154.svg" />
-            <div id="u154_text" class="text" style="display:none; visibility: hidden">
+            <div id="u154_text" class="text" style="display:none; visibility: hidden" >
               <p></p>
             </div>
           </div>
@@ -150,7 +150,7 @@
 
           <!-- Unnamed (SVG) -->
           <div id="u156" class="ax_default image">
-            <img id="u156_img" class="img" src="images/我的/u156.svg" />
+            <img id="u156_img" class="img" src="images/我的/u156.svg"  @click="onUserHome" />
             <div id="u156_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
@@ -320,7 +320,13 @@ export default {
      */
     onUserInfo() {
       this.$router.push("/user/info");
-    }
+    },
+    /**
+     * 去到用户页面
+     */
+    onUserHome() {
+      this.$router.push("/user/home?userId=" + this.user.id);
+    },
   },
 };
 </script>

@@ -75,6 +75,14 @@ const routes = [
       title: '修改信息',
     },
     component: () => import('../views/ModifyUserInfo.vue')
+  },
+  {
+    path: '/user/home',
+    name: 'UserHome',
+    meta: {
+      title: '用户页面',
+    },
+    component: () => import('../views/UserHome.vue')
   }
   
 ]

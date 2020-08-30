@@ -34,7 +34,7 @@ const APIS = {
     },
     getIdle: {
         method: 'get',
-        url: '/v1/idles'
+        url: '/v1/idles/ID'
     },
     listIdles: {
         method: 'get',
