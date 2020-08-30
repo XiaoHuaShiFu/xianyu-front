@@ -59,7 +59,24 @@ const routes = [
       title: '发布闲置',
     },
     component: () => import('../views/Idle.vue')
+  },
+  {
+    path: '/user/info',
+    name: 'UserInfo',
+    meta: {
+      title: '用户信息',
+    },
+    component: () => import('../views/UserInfo.vue')
+  },
+  {
+    path: '/user/info/modify',
+    name: 'ModifyUserInfo',
+    meta: {
+      title: '修改信息',
+    },
+    component: () => import('../views/ModifyUserInfo.vue')
   }
+  
 ]
 
 const router = new VueRouter({

@@ -1,13 +1,13 @@
 <template>
   <div id="base" class>
     <!-- 内容框架 (动态面板) -->
-    <div id="u0" class="ax_default" data-label="内容框架">
-      <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
-      <div id="u0_state0" class="panel_state" data-label="State1" style>
-        <div id="u0_state0_content" class="panel_state_content">
+    <div id="u26" class="ax_default" data-label="内容框架">
+      <van-nav-bar left-text="返回" :border=false left-arrow @click-left="onClickLeft" />
+      <div id="u26_state0" class="panel_state" data-label="State1" style>
+        <div id="u26_state0_content" class="panel_state_content">
           <!-- Unnamed (组合) -->
           <div
-            id="u1"
+            id="u27"
             class="ax_default"
             data-left="48"
             data-top="278"
@@ -15,9 +15,9 @@
             data-height="50"
           >
             <!-- Unnamed (矩形) -->
-            <div id="u2" class="ax_default _默认样式">
-              <div id="u2_div" class></div>
-              <div id="u2_text" class="text" style="display:none; visibility: hidden">
+            <div id="u28" class="ax_default _默认样式">
+              <div id="u28_div" class></div>
+              <div id="u28_text" class="text" style="display:none; visibility: hidden">
                 <p></p>
               </div>
             </div>
@@ -25,7 +25,7 @@
 
           <!-- Unnamed (组合) -->
           <div
-            id="u3"
+            id="u29"
             class="ax_default"
             data-left="99"
             data-top="279"
@@ -33,8 +33,8 @@
             data-height="48"
           >
             <!-- 密码 (文本框) -->
-            <div id="u4" class="ax_default _默认样式" data-label="密码">
-              <div id="u4_div" class></div>
+            <div id="u30" class="ax_default _默认样式" data-label="密码">
+              <div id="u30_div" class></div>
               <van-field
                 style="left: -10px;"
                 v-model="password2"
@@ -46,9 +46,9 @@
           </div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u5" class="ax_default _默认样式" @click="onRegister">
-            <div id="u5_div" class></div>
-            <div id="u5_text" class="text">
+          <div id="u31" class="ax_default _默认样式" @click="onRegister">
+            <div id="u31_div" class></div>
+            <div id="u31_text" class="text">
               <p>
                 <span>确认</span>
               </p>
@@ -57,7 +57,7 @@
 
           <!-- Unnamed (组合) -->
           <div
-            id="u6"
+            id="u32"
             class="ax_default"
             data-left="48"
             data-top="180"
@@ -65,31 +65,31 @@
             data-height="50"
           >
             <!-- Unnamed (矩形) -->
-            <div id="u7" class="ax_default _默认样式">
-              <div id="u7_div" class></div>
-              <div id="u7_text" class="text" style="display:none; visibility: hidden">
+            <div id="u33" class="ax_default _默认样式">
+              <div id="u33_div" class></div>
+              <div id="u33_text" class="text" style="display:none; visibility: hidden">
                 <p></p>
               </div>
             </div>
 
             <!-- Unnamed (文本框) -->
-            <div id="u8" class="ax_default _默认样式">
-              <div id="u8_div" class></div>
-              <input id="u8_input" type="text" value class="u8_input" />
+            <div id="u34" class="ax_default _默认样式">
+              <div id="u34_div" class></div>
+              <input id="u34_input" type="text" value class="u34_input" />
             </div>
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u9" class="ax_default image">
-            <img id="u9_img" class="img" src="images/注册/regen/u9.svg" />
-            <div id="u9_text" class="text" style="display:none; visibility: hidden">
+          <div id="u35" class="ax_default image">
+            <img id="u35_img" class="img" src="images/登入/u13.svg" />
+            <div id="u35_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>
 
           <!-- Unnamed (组合) -->
           <div
-            id="u10"
+            id="u36"
             class="ax_default"
             data-left="48"
             data-top="229"
@@ -97,9 +97,9 @@
             data-height="50"
           >
             <!-- Unnamed (矩形) -->
-            <div id="u11" class="ax_default _默认样式">
-              <div id="u11_div" class></div>
-              <div id="u11_text" class="text" style="display:none; visibility: hidden">
+            <div id="u37" class="ax_default _默认样式">
+              <div id="u37_div" class></div>
+              <div id="u37_text" class="text" style="display:none; visibility: hidden">
                 <p></p>
               </div>
             </div>
@@ -107,7 +107,7 @@
 
           <!-- Unnamed (组合) -->
           <div
-            id="u12"
+            id="u38"
             class="ax_default"
             data-left="99"
             data-top="181"
@@ -115,8 +115,8 @@
             data-height="48"
           >
             <!-- 手机号码 (文本框) -->
-            <div id="u13" class="ax_default _默认样式" data-label="手机号码">
-              <div id="u13_div" class></div>
+            <div id="u39" class="ax_default _默认样式" data-label="手机号码">
+              <div id="u39_div" class></div>
               <van-field
                 style="left: -10px;"
                 v-model="username"
@@ -128,7 +128,7 @@
 
           <!-- Unnamed (组合) -->
           <div
-            id="u14"
+            id="u40"
             class="ax_default"
             data-left="99"
             data-top="230"
@@ -136,8 +136,8 @@
             data-height="48"
           >
             <!-- 验证码 (文本框) -->
-            <div id="u15" class="ax_default _默认样式" data-label="验证码">
-              <div id="u15_div" class></div>
+            <div id="u41" class="ax_default _默认样式" data-label="验证码">
+              <div id="u41_div" class></div>
               <van-field
                 style="left: -10px;"
                 v-model="password1"
@@ -149,25 +149,25 @@
           </div>
 
           <!-- Unnamed (图像 ) -->
-          <div id="u16" class="ax_default image">
-            <img id="u16_img" class="img" src="images/注册/regen/u16.png" />
-            <div id="u16_text" class="text" style="display:none; visibility: hidden">
+          <div id="u42" class="ax_default image">
+            <img id="u42_img" class="img" src="images/登入/u5.png" />
+            <div id="u42_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u17" class="ax_default image">
-            <img id="u17_img" class="img" src="images/注册/regen/u17.svg" />
-            <div id="u17_text" class="text" style="display:none; visibility: hidden">
+          <div id="u43" class="ax_default image">
+            <img id="u43_img" class="img" src="images/登入/u14.svg" />
+            <div id="u43_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u18" class="ax_default image">
-            <img id="u18_img" class="img" src="images/注册/regen/u9.svg" />
-            <div id="u18_text" class="text" style="display:none; visibility: hidden">
+          <div id="u44" class="ax_default image">
+            <img id="u44_img" class="img" src="images/登入/u13.svg" />
+            <div id="u44_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>

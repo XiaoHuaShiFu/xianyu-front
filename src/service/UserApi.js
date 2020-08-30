@@ -40,13 +40,28 @@ UserApi["listUsers"] = async (pageNum, pageSize, orderBy) => {
 /**
  * 更新用户
  */
-UserApi["updateUser"] = async (id, available) => {
-    let res = await Http.putUser({
-        id:id,
-        available:available
-    }, true);
+UserApi["updateUser"] = async (user) => {
+    let res = await Http.putUser(user);
     return res
 }
+
+/**
+ * 更新用户头像
+ */
+UserApi["updateUserAvatar"] = async (id, avatar) => {
+    let config = {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    };
+    let res = await Http.putUserAvatar({
+        id:id,
+        avatar:avatar
+    }, true, config);
+    return res
+}
+
+
 
 
 export default UserApi
