@@ -76,6 +76,16 @@ const APIS = {
         method: 'get',
         url: '/v1/users/notices'
     },
+
+    // order
+    getBuyerOrder: {
+        method: 'get',
+        url: '/v1/orders/BuyerID'
+    },
+    getSellerOrder: {
+        method: 'get',
+        url: '/v1/orders/SellerID'
+    },
 }
 
 export default APIS

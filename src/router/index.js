@@ -99,8 +99,23 @@ const routes = [
       title: '地址编辑',
     },
     component: () => import('../views/AddressEdit.vue')
+  },
+  {
+    path: '/user/sellinxianyu',
+    name: 'SellInXianyu',
+    meta: {
+      title: '卖在贤鱼',
+    },
+    component: () => import('../views/SellInXianyu.vue')
+  },
+  {
+    path: '/user/buyinxianyu',
+    name: 'BuyInXianyu',
+    meta: {
+      title: '买在贤鱼',
+    },
+    component: () => import('../views/BuyInXianyu.vue')
   }
-  
 ]
 
 const router = new VueRouter({

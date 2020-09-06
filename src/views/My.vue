@@ -77,11 +77,11 @@
           </div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u148" class="ax_default _默认样式">
-            <div id="u148_div" class></div>
-            <div id="u148_text" class="text">
+          <div id="u148" class="ax_default _默认样式"  >
+            <div id="u148_div" class ></div>
+            <div id="u148_text"  class="text">
               <p>
-                <span>买在贤鱼</span>
+                <span style="border:1px solid red"   @click="toBuyInXianyu" >买在贤鱼</span>
               </p>
             </div>
           </div>
@@ -160,11 +160,11 @@
           <div id="u157" class="ax_default"></div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u158" class="ax_default _默认样式">
+          <div id="u158" class="ax_default _默认样式" >
             <div id="u158_div" class></div>
             <div id="u158_text" class="text">
-              <p>
-                <span>卖在贤鱼</span>
+              <p >
+                <span @click="toSellInXianyu" >卖在贤鱼</span>
               </p>
             </div>
           </div>
@@ -316,6 +316,20 @@ export default {
       this.user = res.data;
     },
     /**
+     * 
+     */
+    toSellInXianyu() {
+      console.log("zzzzzzzzzzzzzz")
+      this.$router.push("/user/sellinxianyu");
+    },
+    /**
+     * 
+     */
+    toBuyInXianyu() {
+      console.log("zzzzzzzzzzzzzz")
+      this.$router.push("/user/buyinxianyu");
+    },
+    /**
      * 去到用户信息页面
      */
     onUserInfo() {
@@ -328,11 +342,12 @@ export default {
       this.$router.push("/user/home?userId=" + this.user.id);
     },
     /**
-     * 去到用户页面
+     * 
      */
     toAddress() {
       this.$router.push("/user/address");
     },
+    
   },
 };
 </script>
