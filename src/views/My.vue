@@ -46,7 +46,7 @@
               <p style="font-size:16px;">
                 <span
                   style="font-family:'Georgia Negreta', 'Georgia Normal', 'Georgia', sans-serif;font-weight:700;color:#5692CC;"
-                >100</span>
+                >{{totalNormal}}</span>
               </p>
             </div>
           </div>
@@ -61,7 +61,7 @@
               <p style="font-size:16px;">
                 <span
                   style="font-family:'Georgia Negreta', 'Georgia Normal', 'Georgia', sans-serif;font-weight:700;color:#5692CC;"
-                >100</span>
+                >17</span>
               </p>
             </div>
           </div>
@@ -81,7 +81,7 @@
             <div id="u148_div" class ></div>
             <div id="u148_text"  class="text">
               <p>
-                <span style="border:1px solid red"   @click="toBuyInXianyu" >买在贤鱼</span>
+                <span @click="toBuyInXianyu" >买在贤鱼</span>
               </p>
             </div>
           </div>
@@ -117,7 +117,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u152" class="ax_default image">
+          <div id="u152" class="ax_default image" >
             <img id="u152_img" class="img" src="images/我的/u152.svg" />
             <div id="u152_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -125,7 +125,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u153" class="ax_default image">
+          <div id="u153" class="ax_default image" >
             <img id="u153_img" class="img" src="images/我的/u153.svg" />
             <div id="u153_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -133,7 +133,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u154" class="ax_default image">
+          <div id="u154" class="ax_default image" >
             <img id="u154_img" class="img" src="images/我的/u154.svg" />
             <div id="u154_text" class="text" style="display:none; visibility: hidden" >
               <p></p>
@@ -141,7 +141,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u155" class="ax_default image">
+          <div id="u155" class="ax_default image" >
             <img id="u155_img" class="img" src="images/我的/u155.svg" />
             <div id="u155_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -149,7 +149,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u156" class="ax_default image">
+          <div id="u156" class="ax_default image" >
             <img id="u156_img" class="img" src="images/我的/u156.svg"  @click="onUserHome" />
             <div id="u156_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -160,11 +160,11 @@
           <div id="u157" class="ax_default"></div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u158" class="ax_default _默认样式" >
+          <div id="u158" class="ax_default _默认样式"  @click="toSellInXianyu"  >
             <div id="u158_div" class></div>
             <div id="u158_text" class="text">
               <p >
-                <span @click="toSellInXianyu" >卖在贤鱼</span>
+                <span>卖在贤鱼</span>
               </p>
             </div>
           </div>
@@ -200,7 +200,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u162" class="ax_default _图片_">
+          <div id="u162" class="ax_default _图片_" >
             <img id="u162_img" class="img" src="images/我的/u162.svg" />
             <div id="u162_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -208,7 +208,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u163" class="ax_default image">
+          <div id="u163" class="ax_default image" >
             <img id="u163_img" class="img" src="images/我的/u152.svg" />
             <div id="u163_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -216,7 +216,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u164" class="ax_default image">
+          <div id="u164" class="ax_default image" >
             <img id="u164_img" class="img" src="images/我的/u153.svg" />
             <div id="u164_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -227,7 +227,7 @@
           <div id="u165" class="ax_default"></div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u166" class="ax_default _图片_">
+          <div id="u166" class="ax_default _图片_" >
             <img id="u166_img" class="img" src="images/我的/u162.svg" />
             <div id="u166_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -235,7 +235,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u167" class="ax_default _图片_">
+          <div id="u167" class="ax_default _图片_" @click="toBuyInXianyu">
             <img id="u167_img" class="img" src="images/我的/u167.svg" />
             <div id="u167_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -243,7 +243,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u168" class="ax_default _图片_">
+          <div id="u168" class="ax_default _图片_" @click="toSellInXianyu">
             <img id="u168_img" class="img" src="images/我的/u168.svg" />
             <div id="u168_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -291,12 +291,13 @@
 <script>
 import Tabbar from "@/components/Tabbar.vue";
 import UserApi from "./../service/UserApi";
-
+import IdleApi from "./../service/IdleApi";
 export default {
   data() {
     return {
       active: "my",
       user: {},
+      totalNormal: 0
     };
   },
   components: {
@@ -305,6 +306,13 @@ export default {
   async created() {
     let userId = sessionStorage.getItem("id");
     this.user = await UserApi.getUserAndSaveInSessionStorage(userId);
+    let res = await IdleApi.listIdles({
+        pageNum: 1,
+        pageSize: 0,
+        userId: this.user.id,
+        status: "NORMAL",
+      });
+      this.totalNormal = res.data.total;
   },
   methods: {
     /**
