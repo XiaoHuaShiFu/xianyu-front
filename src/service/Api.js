@@ -70,6 +70,12 @@ const APIS = {
         method: 'get',
         url: '/v1/users/addresses'
     },
+
+    //message
+    listNotices: {
+        method: 'get',
+        url: '/v1/users/notices'
+    },
 }
 
 export default APIS
