@@ -83,6 +83,22 @@ const routes = [
       title: '用户页面',
     },
     component: () => import('../views/UserHome.vue')
+  },
+  {
+    path: '/user/address',
+    name: 'UserAddress',
+    meta: {
+      title: '收货地址',
+    },
+    component: () => import('../views/Address.vue')
+  },
+  {
+    path: '/user/address/edit',
+    name: 'UserAddressEdit',
+    meta: {
+      title: '地址编辑',
+    },
+    component: () => import('../views/AddressEdit.vue')
   }
   
 ]

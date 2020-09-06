@@ -1,5 +1,6 @@
 import axios from 'axios'
 import service from './Api'
+import { Toast } from 'vant';
 
 let instance = axios.create({
     baseURL: 'https://api.xiaohuashifu.top',
@@ -68,22 +69,39 @@ for (let key in service) {
 instance.interceptors.request.use(config=>{
     // 添加token
     config.headers.Authorization = sessionStorage['token'];
-    // ViewUI.LoadingBar.start();
+    Toast.loading({
+        message: '加载中...',
+        forbidClick: true,
+        duration: 0
+      });
     return config
 }, (response)=>{
     // 请求错误
-    // ViewUI.LoadingBar.finish();
+    Toast.loading({
+        message: '成功...',
+        forbidClick: true,
+        duration: 1
+      });
     return response
 })
 
 // 响应拦截器
 instance.interceptors.response.use(res=>{
     // 请求成功
-    // ViewUI.LoadingBar.finish();
+    Toast.loading({
+        message: '成功...',
+        forbidClick: true,
+        duration: 1
+      });
     return res
 }, (response)=>{
+    console.log(response)
     // 请求错误
-    // ViewUI.LoadingBar.finish();
+    Toast.loading({
+        message: '失败...',
+        forbidClick: true,
+        duration: 1
+      });
     
     response.status = response.response.status
     response.data = response.response.data

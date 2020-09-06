@@ -60,6 +60,16 @@ const APIS = {
         method: 'get',
         url: '/v1/recommendation/idles'
     },
+
+    //address
+     postAddress: {
+        method: 'post',
+        url: '/v1/users/addresses'
+    },
+    listAddresses: {
+        method: 'get',
+        url: '/v1/users/addresses'
+    },
 }
 
 export default APIS

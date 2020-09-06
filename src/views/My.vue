@@ -251,7 +251,7 @@
           </div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u169" class="ax_default box_1">
+          <div id="u169" class="ax_default box_1" @click="toAddress">
             <div id="u169_div" class></div>
             <div id="u169_text" class="text">
               <p>
@@ -326,6 +326,12 @@ export default {
      */
     onUserHome() {
       this.$router.push("/user/home?userId=" + this.user.id);
+    },
+    /**
+     * 去到用户页面
+     */
+    toAddress() {
+      this.$router.push("/user/address");
     },
   },
 };
