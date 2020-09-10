@@ -77,9 +77,9 @@
           </div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u148" class="ax_default _默认样式"  >
-            <div id="u148_div" class ></div>
-            <div id="u148_text"  class="text">
+          <div id="u148" class="ax_default _默认样式">
+            <div id="u148_div" class></div>
+            <div id="u148_text" class="text">
               <p>
                 <span @click="toBuyInXianyu" >买在贤鱼</span>
               </p>
@@ -117,7 +117,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u152" class="ax_default image" >
+          <div id="u152" class="ax_default image">
             <img id="u152_img" class="img" src="images/我的/u152.svg" />
             <div id="u152_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -125,7 +125,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u153" class="ax_default image" >
+          <div id="u153" class="ax_default image">
             <img id="u153_img" class="img" src="images/我的/u153.svg" />
             <div id="u153_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -133,7 +133,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u154" class="ax_default image" >
+          <div id="u154" class="ax_default image">
             <img id="u154_img" class="img" src="images/我的/u154.svg" />
             <div id="u154_text" class="text" style="display:none; visibility: hidden" >
               <p></p>
@@ -141,7 +141,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u155" class="ax_default image" >
+          <div id="u155" class="ax_default image">
             <img id="u155_img" class="img" src="images/我的/u155.svg" />
             <div id="u155_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -149,7 +149,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u156" class="ax_default image" >
+          <div id="u156" class="ax_default image">
             <img id="u156_img" class="img" src="images/我的/u156.svg"  @click="onUserHome" />
             <div id="u156_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -163,7 +163,7 @@
           <div id="u158" class="ax_default _默认样式"  @click="toSellInXianyu"  >
             <div id="u158_div" class></div>
             <div id="u158_text" class="text">
-              <p >
+              <p>
                 <span>卖在贤鱼</span>
               </p>
             </div>
@@ -200,7 +200,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u162" class="ax_default _图片_" >
+          <div id="u162" class="ax_default _图片_">
             <img id="u162_img" class="img" src="images/我的/u162.svg" />
             <div id="u162_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -208,7 +208,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u163" class="ax_default image" >
+          <div id="u163" class="ax_default image">
             <img id="u163_img" class="img" src="images/我的/u152.svg" />
             <div id="u163_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -216,7 +216,7 @@
           </div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u164" class="ax_default image" >
+          <div id="u164" class="ax_default image">
             <img id="u164_img" class="img" src="images/我的/u153.svg" />
             <div id="u164_text" class="text" style="display:none; visibility: hidden">
               <p></p>
@@ -227,7 +227,7 @@
           <div id="u165" class="ax_default"></div>
 
           <!-- Unnamed (SVG) -->
-          <div id="u166" class="ax_default _图片_" >
+          <div id="u166" class="ax_default _图片_">
             <img id="u166_img" class="img" src="images/我的/u162.svg" />
             <div id="u166_text" class="text" style="display:none; visibility: hidden">
               <p></p>
