@@ -6,7 +6,6 @@
          v-model="idleName"
          placeholder="请输入闲置物品名字" 
          label="物品名字" 
-         @input="GetIdleName"
        />
        <van-field 
          v-model="idlePrice"
@@ -47,7 +46,9 @@ export default {
       postTitle:"发布闲置",
       isActive:false,
       sudokus:[],
-      showUpload:true
+      showUpload:true,
+      idleName:"",
+      idlePrice:undefined,
     };
   },
   components: {
@@ -75,12 +76,6 @@ export default {
     },
     clearImg(index){
       this.showImgsrc.splice(index,1);
-    },
-    /* 
-    更改闲置名字、价格、内容 
-    */
-    GetIdleName(){
-      console.log("this.idleName"+this.idleName);
     },
     /*
     发布闲置

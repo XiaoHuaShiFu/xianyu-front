@@ -1,12 +1,12 @@
 <template>
-    <div class="hello">
+    <van-sticky>
         <van-row class="m-header">
             <van-col span="24">
-				<van-icon name="arrow-left" class="m-header-icon" v-show="visible" @click="Back"/>
+				<van-icon name="arrow-left" class="m-header-icon" v-show="isActive" @click="Back"/>
 				{{postTitle}}
 			</van-col>
         </van-row>
-    </div>
+    </van-sticky>
 </template>
 <script>
 export default {
@@ -34,6 +34,5 @@ export default {
         position: absolute;
         top: 16px;
         left: 6px;
-        font-size: 18px;
     }
 </style>

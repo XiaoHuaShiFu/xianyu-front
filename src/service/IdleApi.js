@@ -19,7 +19,10 @@ IdleApi["listIdles"] = async (idleQuery) => {
     return res;
 }
 
-
+/**
+ * 发布闲置
+ */
+//do publishIdle
 
 
 export default IdleApi

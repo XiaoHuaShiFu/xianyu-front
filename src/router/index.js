@@ -115,7 +115,27 @@ const routes = [
       title: '买在贤鱼',
     },
     component: () => import('../views/BuyInXianyu.vue')
-  }
+  },
+  {
+    path: '/idleGoods',
+    name: 'IdleGoods',
+    meta: {
+      title: '闲置商品',
+    },
+    component: () => import('../views/IdleGoods.vue'),
+    children:[
+      {
+        path: 'idleInfo',
+        name: 'IdleInfo',
+        component: () => import('../views/IdleInfo.vue'),
+      },
+      {
+        path: 'idleComment',
+        name: 'IdleComment',
+        component: () => import('../views/IdleComment.vue'),
+      },
+    ]
+  },
 ]
 
 const router = new VueRouter({
