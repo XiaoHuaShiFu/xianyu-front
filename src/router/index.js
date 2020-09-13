@@ -122,6 +122,7 @@ const routes = [
     meta: {
       title: '闲置商品',
     },
+    redirect:'/idleGoods/idleInfo',//默认
     component: () => import('../views/IdleGoods.vue'),
     children:[
       {

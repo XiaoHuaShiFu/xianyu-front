@@ -1,6 +1,6 @@
 <template>
     <van-sticky>
-        <van-tabs title-active-color="#245fd7" background="#eee" color="#245fd7" swipe-threshold="5" v-model="tabActive" @change="getPage">
+        <van-tabs title-active-color="#245fd7" background="#eee" color="#245fd7" v-model="tabActive" @change="getPage">
 			<van-tab v-for="item in tabList" :key="item" :title="item">
                 <router-view></router-view>
             </van-tab>
@@ -29,7 +29,7 @@ export default {
                 default:
                     return false;
             }
-        }
+        },
     }
 };
 </script>
