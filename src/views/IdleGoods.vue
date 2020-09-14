@@ -2,7 +2,6 @@
   <div class="good">
     <Top :postTitle="postTitle" :isActive="isActive"></Top>
     <Tab></Tab>
-    <!-- 底部tab -->
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="留言" @click="onClickComment" />
       <van-goods-action-button type="warning" text="收藏" @click="onClickCollection" />
@@ -30,12 +29,10 @@ export default {
   },
   methods: {
     /*
-    发布闲置
+    获取推荐商品
      */
-    async onPublish() {
-      //let userId = sessionStorage.getItem("id");
-      //let res = await UserApi.updateUserAvatar(userId, file.file);
-      //this.user = res.data;
+    async onGetRecommendation() {
+      
     },
   },
 };

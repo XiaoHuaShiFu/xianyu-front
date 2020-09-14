@@ -24,5 +24,12 @@ IdleApi["listIdles"] = async (idleQuery) => {
  */
 //do publishIdle
 
+/**
+ * 获取推荐商品
+ */
+IdleApi["getRecommendation"] =async(pageNum,pageSize)=> {
+    let getRecommendationResult=await Http.recommendationUsers(pageNum,pageSize);
+    return getRecommendationResult;
+}
 
 export default IdleApi

@@ -1,87 +1,73 @@
 <template>
-  <div class="goods">
-    <van-swipe :autoplay="8000" indicator-color="white">
-      <van-swipe-item v-for="item in picturelist" :key="item">
-        <img :src="setImg(item.imgSrc)"/>
+  <div>
+    <van-swipe :autoplay="8000">
+      <van-swipe-item v-for="(image, index) in images" :key="index">
+        <img :src="image" @click="Preview_img(images,index)" />
       </van-swipe-item>
     </van-swipe>
-    <div class="goods-details">
-      <div class="goods-trait">
+    <div >
+      <div >
         <h2>{{ this.goodsData.name }}</h2>
-        <p>{{ this.goodsData.specifications }}</p>
-        <span>￥{{ this.goodsData.currentPrice }}</span>
+        <p>{{ this.goodsData.seller }}</p>
+        <span >￥{{ this.goodsData.price }}</span>
       </div>
-      <div class="goods-info">
+      <div class="line">
         <h3>闲置物品介绍</h3>
-        <p>{{ this.goodsData.specifications }}</p>
+      </div>
+      <div>
+        <p>{{ this.goodsData.describe }}</p>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { ImagePreview } from "vant"; //引入预览
 export default {
+  name: "HelloWorld",
   data() {
     return {
-      picturelist: [
-        {
-          imgSrc: require("../static/01.jpg"),
-        },
-        {
-          imgSrc: require("../static/02.jpg"),
-        },
-        {
-          imgSrc: require("../static/03.jpg"),
-        },
+      goodsData: {
+        name: "手机",
+        seller: "卖家：吴大哥",
+        price: "99",
+        describe:
+          "描述是垃圾劳动纠纷卡卡发肯德基爱上了动静分离教案设计两地分居垃圾路上的风景垃圾死了的房间里安捷伦的房间里就安乐死立法的接口就描述是垃圾劳动纠纷卡卡发肯德基爱上了动静分离教案设计两地分居垃圾路上的风景垃圾死了的房间里安捷伦的房间里就安乐死立法的接口就",
+      },
+      images: [
+        "https://img.yzcdn.cn/vant/apple-1.jpg",
+        "https://img.yzcdn.cn/vant/apple-2.jpg",
       ],
     };
   },
-  components: {},
-  methods: {},
+  methods: {
+    // 轮播图预览
+    Preview_img(images, index) {
+      ImagePreview({
+        images: images, //图片数组
+        showIndex: true,
+        loop: false,
+        startPosition: index,
+      });
+    },
+  },
 };
 </script>
-<style scoped>
-.goods {
+<style scoped lang='less'>
+.van-swipe {
   width: 100%;
-  height: 100%;
-  padding: 0.42rem 0 0.45rem;
-  overflow: auto;
+  height: 15rem;
+  .van-swipe-item {
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
-.goods .van-swipe {
-  width: 100%;
-  height: 3.5rem;
-}
-.van-swipe .van-swipe-item .img {
-  width: 100%;
-  height: 100%;
-}
-.goods .goods-details {
-  width: 100%;
-  padding-bottom: 0.2rem;
-  background-color: #fff;
-}
-.goods-details .goods-trait {
-  width: 100%;
-  padding: 0.15rem;
-}
-.goods-trait .h2 {
-  font-size: 0.22rem;
-}
-.goods-trait .p {
-  font-size: 0.14rem;
-  color: #333;
-  margin-top: 0.1rem;
-  line-height: 0.22rem;
-}
-.goods-trait .span {
-  display: inline-block;
-
-  font-size: 0.22rem;
-  color: #ff6700;
-  margin-top: 0.1rem;
-}
-.goods-details .goods-info {
-  width: 100%;
-  padding: 0 0.15rem;
-  margin-top: 0.1rem;
+.line {
+  margin: 20px 0;
+  line-height: 1px;
+  border-left: 100px solid #ddd;
+  border-right: 100px solid #ddd;
+  text-align: center;
 }
 </style>

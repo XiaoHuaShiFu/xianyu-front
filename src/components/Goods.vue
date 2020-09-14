@@ -1,8 +1,8 @@
 <template>
-    <div class="content">
-		<van-image :src="product.pic"></van-image>
-		<div>{{product.name}}</div>
-		<div class="gray_text">{{product.desc}}</div>
+    <div class="content" @click="gotoIdleGoods">
+		<van-image :src="product.image"></van-image>
+		<div>{{product.title}}</div>
+		<div class="gray_text">{{product.userId}}</div>
 		<div class="cart-wrap">
 			<div>
 				<span style="color:red">¥{{product.price}}</span>
@@ -15,7 +15,10 @@
 	export default {
 		props:['product'],
 		methods:{
-			
+			gotoIdleGoods() {
+      this.$router.push("/idleGoods");
+      //this.$router.push('/test');
+    },
 		}
 	}
 </script>

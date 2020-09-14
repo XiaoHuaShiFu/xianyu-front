@@ -137,6 +137,14 @@ const routes = [
       },
     ]
   },
+  {
+    path: '/test',
+    name: 'Test',
+    meta: {
+      title: '测试',
+    },
+    component: () => import('../views/Test.vue')
+  },
 ]
 
 const router = new VueRouter({
