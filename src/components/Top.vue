@@ -14,7 +14,7 @@ export default {
   methods: {
     Back() {
 		//console.log('postTitle:'+this.postTitle);   
-		this.$router.go(-1);
+		this.$router.push("/home");
 	},
 	ShowBack(){
 		this.$emit('update:visible',this.isActive);

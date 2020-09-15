@@ -32,7 +32,8 @@ export default {
   },
   methods:{
     onClickBuy(){
-      this.$router.push("/order");
+      console.log("onClickBuy"+this.id);
+      this.$router.push({path:'/order',query:{id:this.id}})
     }
   }
 };

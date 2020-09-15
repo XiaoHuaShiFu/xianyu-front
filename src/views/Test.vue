@@ -1,84 +1,126 @@
 <template>
-  <div @scroll="handleScroll()">
+  <div class="good">
     <Top :postTitle="postTitle" :isActive="isActive"></Top>
-    <van-sticky>
-      <van-search v-model="searchValue" placeholder="请输入搜索关键词" @search="onSearch" />
-    </van-sticky>
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-      <van-grid :border="false" :column-num="2">
-        <van-grid-item v-for="item in productlist" :key="item" @click="gotoIdleGoods">
-          <goods :product="item"></goods>
-        </van-grid-item>
-      </van-grid>
-      <div style="height: 5rem;"></div>
-    </van-pull-refresh>
-    <Tabbar :active="active"></Tabbar>
+    <!--地址-->
+    <div class="jie_diz" @submit="onSubmit">
+      <p>{{addresses.name}} {{addresses.phone}}</p>
+      <p class="p">
+        {{addresses.address}}
+        <i></i>
+      </p>
+    </div>
+    <div class="caix"></div>
+    <van-list class="card" v-model="listLoading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+    <van-card
+      v-for="item in goodsData"
+      :key="item"
+      :price="item.price"
+      :desc="item.detail"
+      :title="item.title"
+      :thumb="item.image"
+    ></van-card>
+    </van-list>
+    <van-submit-bar :loading="isSubLoading"
+            :price="total"
+            button-text="结算"
+            @submit="onSubmit"></van-submit-bar>
   </div>
 </template>
-
 <script>
-import Tabbar from "@/components/Tabbar.vue";
 import Top from "@/components/Top.vue";
-import Goods from "@/components/Goods.vue";
 import IdleApi from "../service/IdleApi";
-
 export default {
   data() {
     return {
-      active: "home",
-      postTitle: "主页",
-      isActive: false,
-      searchValue: "",
-      isClear: false,
-      pageNum: undefined,
-      pageSize: undefined,
-      loading: false, //是否正在加载（下拉）
-      finished: false, //是否加载完成
-      refreshing: false, //是否正在上拉刷新
-      productlist: [],
+      postTitle: "订单信息",
+      isActive: true,
+      addresses: {
+        name: "吴大哥",
+        phone: "182*****710",
+        address: "贵州贵阳市云岩区城区下合群路达亨大厦1606 ",
+      },
+      goodsData: [],
+      id: undefined,
+      isSubLoading: false, // 提交订单loading
     };
   },
   components: {
-    Tabbar,
     Top,
-    Goods,
   },
-  async created() {
-    this.pageNum = 1;
-    this.pageSize = 8;
-    let res = await IdleApi.getRecommendation({
-      pageNum: 1,
-      pageSize: 8,
-    });
-    this.productlist = res.data.list;
-    console.log(this.productlist);
-    for (var i in this.productlist) {
-      var strs = new Array();
-      strs = this.productlist[i].image.split(",");
-      this.productlist[i].image = strs[0];
-      console.log(this.productlist[i].image);
+  created() {
+    this.id = this.$route.query.id;
+    console.log("Order create:" + this.id);
+    if (this.id != undefined) {
+      this.onGetIdleInfo();
     }
   },
   methods: {
-    onSearch(value) {
-      //需要回车才能触发
-      console.log(value);
+    /*
+    获取商品信息
+     */
+    async onGetIdleInfo() {
+      this.goodsData=[];
+      let res = await IdleApi.getIdleInfo(this.id);
+      let goods = res.data;
+      var strs = new Array();
+      strs = goods.image.split(",");
+      goods.image = [];
+      goods.image.push(strs[0]);
+      this.goodsData.push(goods);
     },
-    onRefresh () {
-      console.log("onRefresh");
-      // 下拉刷新
-      this.finished = false; // 不写这句会导致你上拉到底过后在下拉刷新将不能触发下拉加载事件
-      this.loading = true; // 将 loading 设置为 true，表示处于加载状态
-      //this.onload(); // 重新加载数据
-    },
-    handleScroll() {
-      console.log("handleScroll");
-      if (this.$el.scrollTop + this.$el.offsetHeight > this.$el.scrollHeight) {
-        console.log("到达底部");
-      } else {
-        console.log("尚未达底部");
-      }
-    },
+    
   },
+  computed: {
+        // 总价
+        total() {
+          console.log("Order total:" + this.goodsData.price*100);
+            return this.goodsData.price*100;
+        }
+    },
 };
 </script>
+<style scoped>
+.jie_diz {
+  margin: 0.9rem 0.5rem;
+}
+.jie_diz p {
+  color: #535353;
+  font-size: 0.9rem;
+  text-align: left;
+}
+.caix {
+  background: url("../static/cait.jpg") no-repeat;
+  background-size: 100%;
+  height: 0.06rem;
+  border-bottom: solid 0.1rem #e9e9e9;
+}
+.jie_diz p.p i {
+  display: inline-block;
+  width: 0.7rem;
+  height: 1.1rem;
+  background: url("../static/rightGo.png") center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  float: right;
+}
+.jies_qian {
+  border-bottom: solid 0.1rem #e9e9e9;
+  padding: 0.2rem;
+}
+.jies_qian .shangpjis {
+  overflow: hidden;
+  font-size: 0.22rem;
+  color: #626262;
+  padding: 0.15rem 0;
+}
+.jies_qian .shangpjis h1 {
+  float: left;
+}
+.jies_qian .shangpjis p {
+  float: right;
+}
+.card {
+  text-align: right;
+  border-bottom: solid 0.1rem #e9e9e9;
+}
+</style>

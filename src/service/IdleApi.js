@@ -46,7 +46,6 @@ IdleApi["getSearch"] =async(searchInfo)=> {
  * 获取商品信息
  */
 IdleApi["getIdleInfo"] =async(id)=> {
-    console.log("getIdleInfo");
     let getIdleInfoResult = await Http.getIdle({},false,{},"/" + id);
     return getIdleInfoResult;
 }
