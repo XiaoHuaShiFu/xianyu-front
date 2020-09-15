@@ -12,12 +12,14 @@
 <script>
 import Top from "@/components/Top.vue";
 import Tab from "@/components/Tab.vue";
+import IdleApi from "../service/IdleApi";
 export default {
   data() {
     return {
       postTitle: "闲置信息",
       isActive: true,
       titleActive: "",
+      id:undefined,
     };
   },
   components: {
@@ -25,14 +27,18 @@ export default {
     Tab,
   },
   created() {
-    console.log("idle page");
+    this.id = this.$route.query.id;
+    this.onGetIdleInfo();
   },
   methods: {
     /*
-    获取推荐商品
+    获取商品信息
      */
-    async onGetRecommendation() {
-      
+    async onGetIdleInfo() {
+      let res = await IdleApi.getIdleInfo({
+          id:this.id,
+        });
+      console.log(res);
     },
   },
 };

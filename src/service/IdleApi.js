@@ -27,9 +27,27 @@ IdleApi["listIdles"] = async (idleQuery) => {
 /**
  * 获取推荐商品
  */
-IdleApi["getRecommendation"] =async(pageNum,pageSize)=> {
-    let getRecommendationResult=await Http.recommendationUsers(pageNum,pageSize);
+IdleApi["getRecommendation"] =async(pageInfo)=> {
+    //console.log("getRecommendation");
+    let getRecommendationResult=await Http.recommendationUsers(pageInfo);
     return getRecommendationResult;
 }
 
+/**
+ * 关键子搜索闲置
+ */
+IdleApi["getSearch"] =async(searchInfo)=> {
+    //console.log("getRecommendation");
+    let getSearchResult=await Http.searchIdles(searchInfo);
+    return getSearchResult;
+}
+
+/**
+ * 获取商品信息
+ */
+IdleApi["getIdleInfo"] =async(idleId)=> {
+    //console.log("getRecommendation");
+    let getIdleInfoResult=await Http.getIdle(idleId);
+    return getIdleInfoResult;
+}
 export default IdleApi

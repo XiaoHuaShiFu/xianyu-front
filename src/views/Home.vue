@@ -1,18 +1,24 @@
 <template>
-  <div>
+  <div @scroll="handleScroll()">
     <Top :postTitle="postTitle" :isActive="isActive"></Top>
     <van-sticky>
-      <van-search
-        v-model="searchValue"
-        placeholder="请输入搜索关键词"
-        @search="onSearch"
-      />
+      <van-search v-model="searchValue" placeholder="请输入搜索关键词" @search="onSearch" />
     </van-sticky>
-    <van-grid :border="false" :column-num="2">
-      <van-grid-item v-for="item in productlist" :key="item" @click="gotoIdleGoods">
-        <goods :product="item"></goods>
-      </van-grid-item>
-    </van-grid>
+    <div class="home">
+      <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+        <div class="goods">
+          <div class="goods-content" v-for="item in productlist" :key="item" @click="go(item.id)">
+            <div class="goods-picture">
+              <img :src="item.image" alt="商品" />
+            </div>
+            <p class="goods-name">{{ item.title || '-' }}</p>
+            <p class="goods-details">{{ item.detail || '-' }}</p>
+            <span>{{ item.price || '-' }}元</span>
+          </div>
+        </div>
+      </van-list>
+      <div style="height: 5rem;"></div>
+    </div>
     <Tabbar :active="active"></Tabbar>
   </div>
 </template>
@@ -20,8 +26,8 @@
 <script>
 import Tabbar from "@/components/Tabbar.vue";
 import Top from "@/components/Top.vue";
-import Goods from "@/components/Goods.vue";
-import IdleApi from '../service/IdleApi';
+import IdleApi from "../service/IdleApi";
+
 export default {
   data() {
     return {
@@ -30,70 +36,132 @@ export default {
       isActive: false,
       searchValue: "",
       isClear: false,
-      pageNum:undefined,
-      pageSize:undefined,
-      productlist: [
-        /*{
-          id: 1,
-          name: "羊排 1000g",
-          desc: "草园领头羊",
-          price: 120,
-          pic: require("../static/01.jpg"),
-        },
-        {
-          id: 2,
-          name: "猪瘦肉",
-          desc: "乡村,精选",
-          price: 80,
-          pic: require("../static/02.jpg"),
-        },
-        {
-          id: 3,
-          name: "明虾",
-          desc: "南美白虾",
-          price: 240,
-          pic: require("../static/03.jpg"),
-        },
-        {
-          id: 4,
-          name: "龙虾",
-          desc: "澳洲出产",
-          price: 160,
-          pic: require("../static/01.jpg"),
-        },
-        {
-          id: 5,
-          name: "红萝卜",
-          desc: "根根脆爽,饱满红嫩",
-          price: 4,
-          pic: require("../static/02.jpg"),
-        },
-        {
-          id: 6,
-          name: "青尖椒",
-          desc: "入口微辣,肉厚质嫩",
-          price: 4.98,
-          pic: require("../static/03.jpg"),
-        },*/
-      ],
+      pageNum: undefined,
+      pageSize: undefined,
+      isSearch: false,
+      loading: false, // 加载中
+      finished: false, // 加载完成
+      productlist: [],
     };
   },
   components: {
     Tabbar,
     Top,
-    Goods,
   },
-  async created(){
-    this.pageNum=1;
-    this.pageSize=8;
-    let res=await IdleApi.getRecommendation(this.pageNum,this.pageSize);
-    this.productlist=res.list;
-    console.log("res "+res);
+  created() {
+    console.log("created");
+    this.pageNum = 0;
+    this.pageSize = 8;
+    this.onLoad();
   },
   methods: {
-    onSearch(value) {//需要回车才能触发
-      console.log(value);
+    go(val){
+      console.log("go" + val);
+      this.$router.push({path:'/idleGoods',query:{id:val}})
+    },
+    onSearch() {
+      //需要回车才能触发
+      //console.log("onSearch" + this.searchValue);
+      this.pageNum = 0;
+      this.pageSize = 8;
+      this.productlist = [];
+      this.isSearch=true;
+      this.onLoad();
+    },
+    async onLoad() {
+      //console.log("onLoad"+this.searchValue);
+      let list,res;
+      if (this.isSearch) {
+        res = await IdleApi.getSearch({
+          pageNum: this.pageNum + 1,
+          pageSize: this.pageSize,
+          keyword: this.searchValue,
+        });
+        list = res.data.list;
+      } else {
+        res = await IdleApi.getRecommendation({
+          pageNum: this.pageNum + 1,
+          pageSize: this.pageSize,
+        });
+        list = res.data.list;
+      }
+      let num = 0;
+      for (var i in list) {
+        var strs = new Array();
+        strs = list[i].image.split(",");
+        list[i].image = strs[0];
+        this.productlist.push(list[i]);
+        num++;
+      }
+      this.loading = false;
+      if (num == 0) {
+        this.finished = true;
+      } else {
+        this.pageNum += 1;
+      }
     },
   },
 };
 </script>
+<style scoped lang='less'>
+.home {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  overflow: auto;
+  background: #fff;
+  background-size: 100% 100%;
+  .goods {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    padding: 0.1rem 0.1rem;
+    .goods-content {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+      width: 49%;
+      padding: 0.1rem 0.08rem;
+      margin-bottom: 0.08rem;
+      background-color: #fff;
+      border-radius: 0.04rem;
+      .goods-picture {
+        width: 100%;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .goods-name {
+        width: 100%;
+        text-align: center;
+        font-size: 0.14rem;
+        color: #000;
+        margin-top: 0.1rem;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .goods-details {
+        width: 100%;
+        text-align: center;
+        font-size: 0.12rem;
+        color: #666;
+        margin-top: 0.1rem;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      span {
+        font-size: 0.14rem;
+        color: #ff6700;
+        margin-top: 0.1rem;
+      }
+    }
+  }
+}
+</style>
