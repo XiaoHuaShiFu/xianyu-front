@@ -2,7 +2,7 @@
     <van-sticky>
         <van-tabs title-active-color="#245fd7" background="#eee" color="#245fd7" v-model="tabActive" @change="getPage">
 			<van-tab v-for="item in tabList" :key="item" :title="item">
-                <router-view></router-view>
+                <router-view :id="id0"></router-view>
             </van-tab>
 		</van-tabs>
     </van-sticky>
@@ -10,10 +10,12 @@
 <script>
 export default {
     name: 'Tab',
+    props: ["id"],
     data() {
         return {
             tabActive: 0, // 当前栏
-            tabList: ['信息', '留言'] // tab 列表
+            tabList: ['信息', '留言'], // tab 列表
+            id0:this.id,
         };
     },
     methods: {

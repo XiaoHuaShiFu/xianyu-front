@@ -1,43 +1,38 @@
 <template>
   <div>
     <van-swipe :autoplay="8000">
-      <van-swipe-item v-for="(image, index) in images" :key="index">
-        <img :src="image" @click="Preview_img(images,index)" />
+      <van-swipe-item v-for="(image, index) in goodsData.image" :key="index">
+        <img :src="image" @click="Preview_img(goodsData.image,index)" />
       </van-swipe-item>
     </van-swipe>
     <div >
       <div >
-        <h2>{{ this.goodsData.name }}</h2>
-        <p>{{ this.goodsData.seller }}</p>
-        <span >￥{{ this.goodsData.price }}</span>
+        <h2>{{ this.goodsData.title }}</h2>
+        <!--<p>{{ this.goodsData.userId }}</p>-->
+        <span class="red">{{ this.goodsData.price }}元</span>
       </div>
       <div class="line">
         <h3>闲置物品介绍</h3>
       </div>
       <div>
-        <p>{{ this.goodsData.describe }}</p>
+        <p>{{ this.goodsData.detail }}</p>
       </div>
     </div>
   </div>
 </template>
 <script>
 import { ImagePreview } from "vant"; //引入预览
+import IdleApi from "../service/IdleApi";
 export default {
   name: "HelloWorld",
+  props: ["id"],
   data() {
     return {
-      goodsData: {
-        name: "手机",
-        seller: "卖家：吴大哥",
-        price: "99",
-        describe:
-          "描述是垃圾劳动纠纷卡卡发肯德基爱上了动静分离教案设计两地分居垃圾路上的风景垃圾死了的房间里安捷伦的房间里就安乐死立法的接口就描述是垃圾劳动纠纷卡卡发肯德基爱上了动静分离教案设计两地分居垃圾路上的风景垃圾死了的房间里安捷伦的房间里就安乐死立法的接口就",
-      },
-      images: [
-        "https://img.yzcdn.cn/vant/apple-1.jpg",
-        "https://img.yzcdn.cn/vant/apple-2.jpg",
-      ],
+      goodsData: {},
     };
+  },
+  created(){
+    this.onGetIdleInfo();
   },
   methods: {
     // 轮播图预览
@@ -48,6 +43,20 @@ export default {
         loop: false,
         startPosition: index,
       });
+    },
+    /*
+    获取商品信息
+     */
+    async onGetIdleInfo() {
+      console.log("onGetIdleInfo:"+this.id);
+      let res = await IdleApi.getIdleInfo(this.id);
+      this.goodsData=res.data;
+      var strs = new Array();
+      strs = this.goodsData.image.split(",");
+      this.goodsData.image=[];
+      for (var i in strs){
+        this.goodsData.image.push(strs[i]);
+      }
     },
   },
 };
@@ -69,5 +78,9 @@ export default {
   border-left: 100px solid #ddd;
   border-right: 100px solid #ddd;
   text-align: center;
+}
+.red{
+  color:#ff6700;
+  font-size: 21px;
 }
 </style>

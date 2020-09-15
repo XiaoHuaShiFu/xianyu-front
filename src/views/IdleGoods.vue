@@ -1,7 +1,7 @@
 <template>
   <div class="good">
     <Top :postTitle="postTitle" :isActive="isActive"></Top>
-    <Tab></Tab>
+    <Tab :id=id></Tab>
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="留言" @click="onClickComment" />
       <van-goods-action-button type="warning" text="收藏" @click="onClickCollection" />
@@ -12,7 +12,6 @@
 <script>
 import Top from "@/components/Top.vue";
 import Tab from "@/components/Tab.vue";
-import IdleApi from "../service/IdleApi";
 export default {
   data() {
     return {
@@ -28,19 +27,14 @@ export default {
   },
   created() {
     this.id = this.$route.query.id;
+    console.log("created"+this.id);
     this.onGetIdleInfo();
   },
-  methods: {
-    /*
-    获取商品信息
-     */
-    async onGetIdleInfo() {
-      let res = await IdleApi.getIdleInfo({
-          id:this.id,
-        });
-      console.log(res);
-    },
-  },
+  methods:{
+    onClickBuy(){
+      this.$router.push("/order");
+    }
+  }
 };
 </script>
 <style scoped>

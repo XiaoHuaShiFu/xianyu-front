@@ -27,6 +27,7 @@ export default {
       active: "message",
       postTitle:"消息",
       isActive:false,
+      props: ["idleId"],
       msgList:[
         {
           name:"吴大哥",
