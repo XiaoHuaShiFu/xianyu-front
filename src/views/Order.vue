@@ -68,6 +68,7 @@ export default {
 
     onSubmit() {
       console.log("dd");
+      this.$router.push("/order/orderResult");
     },
   },
   computed: {

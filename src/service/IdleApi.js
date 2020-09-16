@@ -22,7 +22,15 @@ IdleApi["listIdles"] = async (idleQuery) => {
 /**
  * 发布闲置
  */
-//do publishIdle
+IdleApi["postIdleInfo"] =async(idleInfo)=> {
+    let config = {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    };
+    let postIdleInfoResult=await Http.postIdle(idleInfo, true, config);
+    return postIdleInfoResult;
+}
 
 /**
  * 获取推荐商品

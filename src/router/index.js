@@ -146,6 +146,14 @@ const routes = [
     component: () => import('../views/Order.vue')
   },
   {
+    path: '/order/orderResult',
+    name: 'OrderResult',
+    meta: {
+      title: '订单结果',
+    },
+    component: () => import('../views/OrderResult.vue')
+  },
+  {
     path: '/test',
     name: 'Test',
     meta: {

@@ -2,11 +2,7 @@
 <template>
   <div style="background-color:#ebebeb; height:100%">
     <Tabbar :active="active"></Tabbar>
-    <van-nav-bar style="background-color:#5692CC;">
-      <template #title>
-        <div style="color:#fff;font-size:20px;font-weight:bold;">消息中心</div>
-      </template>
-    </van-nav-bar>
+    <Top :postTitle="postTitle" :isActive="isActive"></Top>
     <van-list v-model="loading" :finished="finished" @load="onLoad1">
       <van-cell style="margin-bottom:10px;" v-for="item in list" :key="item.id">
         <van-row style="height:50px;">
@@ -41,6 +37,7 @@ import Tabbar from "@/components/Tabbar.vue";
 import UserApi from "./../service/UserApi";
 import adaptString from "./../utils/StringUtils";
 import changeTime from "./../utils/DateUtils";
+import Top from "@/components/Top.vue";
 export default {
   data() {
     return {
@@ -52,10 +49,13 @@ export default {
       pageNum: 0,
       pageSize: 3,
       totalNormal: 0,
+      postTitle: "消息中心",
+      isActive: false,
     };
   },
   components: {
-    Tabbar
+    Tabbar,
+    Top,
   },
   async created() {
     let userId = sessionStorage.getItem("id");

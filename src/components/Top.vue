@@ -27,7 +27,9 @@ export default {
         height: 50px;
         line-height: 50px;
         background: #245fd7;
-        color: #fff;
+        color:#fff;
+        font-size:20px;
+        font-weight:bold;
     }
     
     .m-header-icon {

@@ -13,9 +13,15 @@
          label="物品价格" 
          type="number"
        />
+       <van-field 
+         v-model="idlePostage"
+         placeholder="请输入价格" 
+         label="快递价格" 
+         type="number"
+       />
     </van-cell-group>
     <div class="text-area">
-      <textarea placeholder="请输入闲置描述..." >
+      <textarea v-model="detail" placeholder="请输入闲置描述..." >
       </textarea>
     </div>
     <div class="sudoku_row"  >
@@ -28,7 +34,7 @@
         </van-uploader>
     </div>
     <div>
-      <van-button class="button-publish">发布</van-button>
+      <van-button class="button-publish" @click="onPublish">发布</van-button>
     </div>
     <Tabbar :active="active"></Tabbar>
   </div>
@@ -37,8 +43,9 @@
 <script>
 import Tabbar from "@/components/Tabbar.vue";
 import Top from "@/components/Top.vue";
+import IdleApi from "../service/IdleApi";
+//import { Notify } from 'vant';
 //import UserApi from "./../service/UserApi";
-//import { Notify } from "vant";
 export default {
   data() {
     return {
@@ -49,6 +56,8 @@ export default {
       showUpload:true,
       idleName:"",
       idlePrice:undefined,
+      idlePostage:undefined,
+      detail:"",
     };
   },
   components: {
@@ -66,7 +75,8 @@ export default {
       console.log("Upload");
       this.sudokus.push({
         id:this.sudokus.length,
-        img_src:file.content
+        img_src:file.content,
+        image:file.file
       })
       if(this.sudokus.length>=6){
         //Notify("上传图片最多6张！");
@@ -81,9 +91,21 @@ export default {
     发布闲置
      */
     async onPublish() {
-      //let userId = sessionStorage.getItem("id");
-      //let res = await UserApi.updateUserAvatar(userId, file.file);
-      //this.user = res.data;
+      console.log("detail"+this.detail);
+      var images=[];
+      for(var i in this.sudokus){
+        images.push(this.sudokus[i].image);
+      }
+      let publishJson={
+        user_id:sessionStorage.getItem("id"),
+        price:this.idlePrice,
+        title:this.idleName,
+        postage:this.idlePostage,
+        detail:this.detail,
+        images:images
+      };
+      let res = await IdleApi.postIdleInfo(publishJson);
+      console.log("res:"+res);
     },
   },
 };
