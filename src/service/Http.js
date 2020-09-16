@@ -25,7 +25,7 @@ for (let key in service) {
         if (params && isFormData) {
             newParams = new FormData()
             for (let i in params) {
-                if (i == "imageList") {
+                if (i == "images") {
                     for (let image in params[i]) {
                         newParams.append(i, params[i][image])
                     }          
@@ -95,7 +95,6 @@ instance.interceptors.response.use(res=>{
       });
     return res
 }, (response)=>{
-    console.log(response)
     // 请求错误
     Toast.loading({
         message: '失败...',

@@ -105,7 +105,7 @@ export default {
         images:images
       };
       let res = await IdleApi.postIdleInfo(publishJson);
-      console.log("res:"+res);
+      console.log(res);
     },
   },
 };
