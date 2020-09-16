@@ -34,10 +34,10 @@ export default {
         address: "贵州贵阳市云岩区城区下合群路达亨大厦1606 ",
       },
       goodsData: {
-        price:3121,
-        title:"sakfjd",
-        detail:"sfasfsdf",
-        image:require('../static/01.jpg'),
+        price: 3121,
+        title: "sakfjd",
+        detail: "sfasfsdf",
+        image: require("../static/01.jpg"),
       },
       id: undefined,
     };
@@ -58,20 +58,25 @@ export default {
      */
     async onGetIdleInfo() {
       let res = await IdleApi.getIdleInfo(this.id);
+      console.log(res);
       this.goodsData = res.data;
       var strs = new Array();
       strs = this.goodsData.image.split(",");
-      this.goodsData.image =strs[0];
+      this.goodsData.image = strs[0];
       console.log(this.goodsData);
+    },
+
+    onSubmit() {
+      console.log("dd");
     },
   },
   computed: {
-        // 总价
-        total() {
-          console.log("Order total:" + this.goodsData.price*100);
-            return this.goodsData.price*100;
-        }
+    // 总价
+    total() {
+      console.log("Order total:" + this.goodsData.price * 100);
+      return this.goodsData.price * 100;
     },
+  },
 };
 </script>
 <style scoped>
