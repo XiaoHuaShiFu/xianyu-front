@@ -46,6 +46,15 @@ export default {
      * 返回上一页
      */
     onClickLeft() {
+      for (var val in this.list) {
+        if (this.list[val].id == this.chosenAddressId) {
+          console.log("onSelect:"+this.list[val].id+" "+this.list[val].name);
+          localStorage.setItem("addressId", this.list[val].id);
+          localStorage.setItem("addressName", this.list[val].name);
+          localStorage.setItem("addressPhone", this.list[val].tel);
+          localStorage.setItem("addressAddress", this.list[val].address);
+        }
+      }
       this.$router.go(-1);
     },
     /**
@@ -69,6 +78,7 @@ export default {
           }
           if (this.chosenAddressId == null) {
             this.chosenAddressId = list0[i].id;
+            //this.onSelect();
           }
           list0[i].isDefault = false;
           this.list.push(list0[i]);

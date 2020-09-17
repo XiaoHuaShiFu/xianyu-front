@@ -86,6 +86,10 @@ const APIS = {
         method: 'get',
         url: '/v1/orders/SellerID'
     },
+    postOrder:{
+        method: 'post',
+        url: '/v1/orders'
+    },
 }
 
 export default APIS

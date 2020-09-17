@@ -44,7 +44,7 @@
 import Tabbar from "@/components/Tabbar.vue";
 import Top from "@/components/Top.vue";
 import IdleApi from "../service/IdleApi";
-//import { Notify } from 'vant';
+import { Notify } from 'vant';
 //import UserApi from "./../service/UserApi";
 export default {
   data() {
@@ -105,7 +105,10 @@ export default {
         images:images
       };
       let res = await IdleApi.postIdleInfo(publishJson);
-      console.log(res);
+      if(res.status==201){
+        Notify({ type: "success", message: "发布成功" });
+        this.$router.push("/home");
+      }
     },
   },
 };

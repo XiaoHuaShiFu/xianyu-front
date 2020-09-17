@@ -62,7 +62,7 @@
                       {{item.title}}
                   </van-row>
                   <van-row style="padding-top:10px;text-align:left;line-height:15px;color:#999; font-size:13px;">
-                      用户：{{item.detail}}
+                      描述：{{item.detail}}
                   </van-row>
                   <van-row style="padding-top:10px;text-align:left;line-height:20px;color:red; font-size:14px;">
                       ￥{{item.price}}

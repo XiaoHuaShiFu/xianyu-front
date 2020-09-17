@@ -7,7 +7,7 @@
     <div class="home">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
         <div class="goods">
-          <div class="goods-content" v-for="item in productlist" :key="item" @click="go(item.id)">
+          <div class="goods-content" v-for="item in productlist" :key="item" @click="go(item.id,item.userId)">
             <div class="goods-picture">
               <img :src="item.image" alt="商品" />
             </div>
@@ -55,9 +55,9 @@ export default {
     this.onLoad();
   },
   methods: {
-    go(val){
-      console.log("go" + val);
-      this.$router.push({path:'/idleGoods',query:{id:val}})
+    go(val,val1){
+      console.log("go:" + val+" "+val1);
+      this.$router.push({path:'/idleGoods',query:{id:val,userId:val1}})
     },
     onSearch() {
       //需要回车才能触发

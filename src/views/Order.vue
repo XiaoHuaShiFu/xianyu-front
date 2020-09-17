@@ -2,7 +2,7 @@
   <div class="good">
     <Top :postTitle="postTitle" :isActive="isActive"></Top>
     <!--地址-->
-    <div class="jie_diz" @submit="onSubmit">
+    <div class="jie_diz" @click="onAddress">
       <p>{{addresses.name}} {{addresses.phone}}</p>
       <p class="p">
         {{addresses.address}}
@@ -17,21 +17,42 @@
       :title="goodsData.title"
       :thumb="goodsData.image"
     ></van-card>
+    <div class="jies_qian">
+      <div class="shangpjis">
+        <h1>商品总计</h1>
+        <p>
+          <span>¥{{goodsData.price}}</span>
+        </p>
+      </div>
+      <div class="shangpjis">
+        <h1>运费</h1>
+        <p>
+          <span>¥{{this.goodsData.postage}}</span>
+        </p>
+      </div>
+    </div>
     <van-submit-bar :price="total" button-text="结算" @submit="onSubmit"></van-submit-bar>
   </div>
 </template>
 <script>
 import Top from "@/components/Top.vue";
 import IdleApi from "../service/IdleApi";
+import AddressApi from "./../service/AddressApi";
+import adaptString from "./../utils/StringUtils";
+import UserApi from "./../service/UserApi";
+import OrderApi from "./../service/OrderApi";
+import { Notify } from "vant";
 export default {
   data() {
     return {
       postTitle: "订单信息",
       isActive: true,
+      isAddress:false,
       addresses: {
-        name: "吴大哥",
-        phone: "182*****710",
-        address: "贵州贵阳市云岩区城区下合群路达亨大厦1606 ",
+        name: "无姓名",
+        phone: "0000000000",
+        address: "某某省某某市某某区某某路某某小区666号 ",
+        id:0,
       },
       goodsData: {
         price: 3121,
@@ -48,6 +69,16 @@ export default {
   created() {
     this.id = this.$route.query.id;
     console.log("Order create:" + this.id);
+    if(localStorage.getItem('addressId')!=''){
+      console.log("localStorage.getItem:"+localStorage.getItem('addressName'));
+      this.addresses.id=localStorage.getItem('addressId');
+      this.addresses.name=localStorage.getItem('addressName');
+      this.addresses.phone=localStorage.getItem('addressPhone');
+      this.addresses.address=localStorage.getItem('addressAddress');
+    }
+    else {
+      this.onGetAddress();
+    }
     if (this.id != undefined) {
       this.onGetIdleInfo();
     }
@@ -65,17 +96,66 @@ export default {
       this.goodsData.image = strs[0];
       console.log(this.goodsData);
     },
-
-    onSubmit() {
+    /*
+    获取默认地址
+     */
+    async onGetAddress() {
+      let res = await AddressApi.listAddresses({
+        pageNum: 1,
+        pageSize: 1,
+        userId: sessionStorage.getItem("id"),
+      });
+      let list0 = res.data.list;
+      if (list0.length > 0) {
+        this.isAddress=true;
+        for (let i = 0; i < 1; i++) {
+          this.addresses.name = list0[i].fullName;
+          this.addresses.phone = list0[i].phone;
+          this.addresses.address = adaptString(list0[i].address, 30);
+          this.addresses.id=list0[i].id;
+        }
+      }
+    },
+    /*
+    选择地址
+     */
+    onAddress(){
+      this.$router.push("/user/address");
+    },
+    async onSubmit() {
       console.log("dd");
-      this.$router.push("/order/orderResult");
+      var res = await UserApi.getUserAndSaveInSessionStorage(sessionStorage.getItem("id"));
+      if(res.aliPayAccount==null){
+        Notify({ type: "warning", message: "个人信息支付宝未完善" });
+        return;
+      }
+      let postOrderInfo={
+        sellerId:this.goodsData.userId,
+        buyerId:sessionStorage.getItem("id"),
+        idleId:this.goodsData.id,
+        freight:this.goodsData.postage,
+        actualPay:this.goodsData.price+this.goodsData.postage,
+        totalPrice:this.goodsData.price,
+        aliPayNumber:res.aliPayAccount,
+        addressId:this.addresses.id,
+      };
+      console.log("postOrderInfo:"+postOrderInfo);
+      res=await OrderApi.postOrder(postOrderInfo);
+      console.log("postOrder:"+res);
+      if(res.status==201){
+        Notify({ type: "success", message: "购买成功" });
+        //this.$router.push("/order/orderResult");
+      }
+      else{
+        Notify({ type: "warning", message: "购买失败" });
+      }
     },
   },
   computed: {
     // 总价
     total() {
-      console.log("Order total:" + this.goodsData.price * 100);
-      return this.goodsData.price * 100;
+      console.log("Order total:" +  (this.goodsData.price+this.goodsData.postage)* 100);
+      return (this.goodsData.price+this.goodsData.postage)* 100;
     },
   },
 };

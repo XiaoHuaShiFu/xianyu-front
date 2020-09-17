@@ -75,6 +75,7 @@ export default {
       } else if (this.$route.query.param == "支付宝") {
         user.aliPayAccount = this.value;
       }
+      console.log("user:"+user);
       let res = await UserApi.updateUser(user);
       if (res.status == 200) {
         Notify({ type: "success", message: "修改成功！" });
