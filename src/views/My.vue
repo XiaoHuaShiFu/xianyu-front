@@ -81,7 +81,7 @@
             <div id="u148_div" class></div>
             <div id="u148_text" class="text">
               <p>
-                <span @click="toBuyInXianyu" >买在贤鱼</span>
+                <span @click="toBuyInXianyu">买在贤鱼</span>
               </p>
             </div>
           </div>
@@ -135,7 +135,7 @@
           <!-- Unnamed (SVG) -->
           <div id="u154" class="ax_default image">
             <img id="u154_img" class="img" src="images/我的/u154.svg" />
-            <div id="u154_text" class="text" style="display:none; visibility: hidden" >
+            <div id="u154_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
           </div>
@@ -150,7 +150,7 @@
 
           <!-- Unnamed (SVG) -->
           <div id="u156" class="ax_default image">
-            <img id="u156_img" class="img" src="images/我的/u156.svg"  @click="onUserHome" />
+            <img id="u156_img" class="img" src="images/我的/u156.svg" @click="onUserHome" />
             <div id="u156_text" class="text" style="display:none; visibility: hidden">
               <p></p>
             </div>
@@ -160,7 +160,7 @@
           <div id="u157" class="ax_default"></div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u158" class="ax_default _默认样式"  @click="toSellInXianyu"  >
+          <div id="u158" class="ax_default _默认样式" @click="toSellInXianyu">
             <div id="u158_div" class></div>
             <div id="u158_text" class="text">
               <p>
@@ -297,7 +297,7 @@ export default {
     return {
       active: "my",
       user: {},
-      totalNormal: 0
+      totalNormal: 0,
     };
   },
   components: {
@@ -306,13 +306,20 @@ export default {
   async created() {
     let userId = sessionStorage.getItem("id");
     this.user = await UserApi.getUserAndSaveInSessionStorage(userId);
+
+    if (
+      this.user.avatarUrl ==
+      "https://file.xiaohuashifu.top/user/avatar/default.png"
+    ) {
+      this.user.avatarUrl = "/images/我的/xianyu.jpg";
+    }
     let res = await IdleApi.listIdles({
-        pageNum: 1,
-        pageSize: 0,
-        userId: this.user.id,
-        status: "NORMAL",
-      });
-      this.totalNormal = res.data.total;
+      pageNum: 1,
+      pageSize: 0,
+      userId: this.user.id,
+      status: "NORMAL",
+    });
+    this.totalNormal = res.data.total;
   },
   methods: {
     /**
@@ -324,17 +331,17 @@ export default {
       this.user = res.data;
     },
     /**
-     * 
+     *
      */
     toSellInXianyu() {
-      console.log("zzzzzzzzzzzzzz")
+      console.log("zzzzzzzzzzzzzz");
       this.$router.push("/user/sellinxianyu");
     },
     /**
-     * 
+     *
      */
     toBuyInXianyu() {
-      console.log("zzzzzzzzzzzzzz")
+      console.log("zzzzzzzzzzzzzz");
       this.$router.push("/user/buyinxianyu");
     },
     /**
@@ -350,12 +357,11 @@ export default {
       this.$router.push("/user/home?userId=" + this.user.id);
     },
     /**
-     * 
+     *
      */
     toAddress() {
       this.$router.push("/user/address");
     },
-    
   },
 };
 </script>

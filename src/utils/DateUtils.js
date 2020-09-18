@@ -10,7 +10,7 @@ const changeTime = (stringTime) => {
 
     var result = null;
     if (time < 0) {
-        alert("设置的时间不能早于当前时间！" + time);
+        result = stringTime.substring(5, 16);
     } else if (time / month >= 1) {
         result = stringTime.substring(5, 16);
     } else if (time / week >= 1) {
