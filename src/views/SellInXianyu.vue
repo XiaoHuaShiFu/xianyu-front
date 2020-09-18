@@ -73,7 +73,11 @@ export default {
     this.userId = sessionStorage.getItem("id");
     this.loading = true;
     let res = await this.$Http.getSellerOrder({}, false, {}, "/" + this.userId);
-    let list0 = res.data.data;
+    let list0 = [];
+    if (res.status != 404) {
+      list0 = res.data.data;
+    }
+    
     if (list0.length > 0) {
       for (let i = 0; i < list0.length; i++) {
         list0[i].image = parseImageString(list0[i].idle.image);
