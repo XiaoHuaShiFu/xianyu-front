@@ -9,9 +9,9 @@
       <div
         style="width: 80%; margin: 0 auto; line-height: 23px; text-align: center; margin-bottom: 20px; font-size: 14px;"
       >
-        订单编号：12355667777
-        <br />消费金额：234.00元
-        <br />支付方式：微信支付
+        订单编号：{{id}}
+        <br />消费金额：{{actualPay}}元
+        <br />支付方式：支付宝支付
       </div>
 
       <p style="text-align: center; margin-bottom: 10px;">
@@ -29,13 +29,19 @@ export default {
     return {
       postTitle: "订单结果",
       isActive: false,
+      id:undefined,
+      actualPay:undefined,
     };
   },
   components: {
     Top,
     Tabbar,
   },
-  created() {},
+  created() {
+    this.id = this.$route.query.id;
+    this.actualPay=this.$route.query.actualPay;
+    console.log("OrderResult"+this.id+" "+this.actualPay);
+  },
   methods: {
     OnBuy(){
       this.$router.push("/home");

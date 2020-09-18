@@ -131,11 +131,6 @@ export default {
         Notify({ type: "warning", message: "个人信息支付宝未完善" });
         return;
       }
-      let config = {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      };
       res = await this.$Http.postOrder(
         {
           sellerId: this.goodsData.userId,
@@ -147,13 +142,11 @@ export default {
           aliPayNumber: res.aliPayAccount,
           addressId: this.addresses.id,
         },
-        true,
-        config
       );
-      console.log("postOrder:" + res);
+      console.log(res);
       if (res.status == 201) {
         Notify({ type: "success", message: "购买成功" });
-        //this.$router.push("/order/orderResult");
+        this.$router.push({path:'/order/orderResult',query:{actualPay:res.data.data.actualPay,id:res.data.data.id}});
       } else {
         Notify({ type: "warning", message: "购买失败" });
       }
