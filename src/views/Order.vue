@@ -40,19 +40,18 @@ import IdleApi from "../service/IdleApi";
 import AddressApi from "./../service/AddressApi";
 import adaptString from "./../utils/StringUtils";
 import UserApi from "./../service/UserApi";
-import OrderApi from "./../service/OrderApi";
 import { Notify } from "vant";
 export default {
   data() {
     return {
       postTitle: "订单信息",
       isActive: true,
-      isAddress:false,
+      isAddress: false,
       addresses: {
         name: "无姓名",
         phone: "0000000000",
         address: "某某省某某市某某区某某路某某小区666号 ",
-        id:0,
+        id: 0,
       },
       goodsData: {
         price: 3121,
@@ -69,14 +68,15 @@ export default {
   created() {
     this.id = this.$route.query.id;
     console.log("Order create:" + this.id);
-    if(localStorage.getItem('addressId')!=''){
-      console.log("localStorage.getItem:"+localStorage.getItem('addressName'));
-      this.addresses.id=localStorage.getItem('addressId');
-      this.addresses.name=localStorage.getItem('addressName');
-      this.addresses.phone=localStorage.getItem('addressPhone');
-      this.addresses.address=localStorage.getItem('addressAddress');
-    }
-    else {
+    if (localStorage.getItem("addressId") != "") {
+      console.log(
+        "localStorage.getItem:" + localStorage.getItem("addressName")
+      );
+      this.addresses.id = localStorage.getItem("addressId");
+      this.addresses.name = localStorage.getItem("addressName");
+      this.addresses.phone = localStorage.getItem("addressPhone");
+      this.addresses.address = localStorage.getItem("addressAddress");
+    } else {
       this.onGetAddress();
     }
     if (this.id != undefined) {
@@ -107,46 +107,54 @@ export default {
       });
       let list0 = res.data.list;
       if (list0.length > 0) {
-        this.isAddress=true;
+        this.isAddress = true;
         for (let i = 0; i < 1; i++) {
           this.addresses.name = list0[i].fullName;
           this.addresses.phone = list0[i].phone;
           this.addresses.address = adaptString(list0[i].address, 30);
-          this.addresses.id=list0[i].id;
+          this.addresses.id = list0[i].id;
         }
       }
     },
     /*
     选择地址
      */
-    onAddress(){
+    onAddress() {
       this.$router.push("/user/address");
     },
     async onSubmit() {
       console.log("dd");
-      var res = await UserApi.getUserAndSaveInSessionStorage(sessionStorage.getItem("id"));
-      if(res.aliPayAccount==null){
+      var res = await UserApi.getUserAndSaveInSessionStorage(
+        sessionStorage.getItem("id")
+      );
+      if (res.aliPayAccount == null) {
         Notify({ type: "warning", message: "个人信息支付宝未完善" });
         return;
       }
-      let postOrderInfo={
-        sellerId:this.goodsData.userId,
-        buyerId:sessionStorage.getItem("id"),
-        idleId:this.goodsData.id,
-        freight:this.goodsData.postage,
-        actualPay:this.goodsData.price+this.goodsData.postage,
-        totalPrice:this.goodsData.price,
-        aliPayNumber:res.aliPayAccount,
-        addressId:this.addresses.id,
+      let config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
       };
-      console.log("postOrderInfo:"+postOrderInfo);
-      res=await OrderApi.postOrder(postOrderInfo);
-      console.log("postOrder:"+res);
-      if(res.status==201){
+      res = await this.$Http.postOrder(
+        {
+          sellerId: this.goodsData.userId,
+          buyerId: sessionStorage.getItem("id"),
+          idleId: this.goodsData.id,
+          freight: this.goodsData.postage,
+          actualPay: this.goodsData.price + this.goodsData.postage,
+          totalPrice: this.goodsData.price,
+          aliPayNumber: res.aliPayAccount,
+          addressId: this.addresses.id,
+        },
+        true,
+        config
+      );
+      console.log("postOrder:" + res);
+      if (res.status == 201) {
         Notify({ type: "success", message: "购买成功" });
         //this.$router.push("/order/orderResult");
-      }
-      else{
+      } else {
         Notify({ type: "warning", message: "购买失败" });
       }
     },
@@ -154,8 +162,10 @@ export default {
   computed: {
     // 总价
     total() {
-      console.log("Order total:" +  (this.goodsData.price+this.goodsData.postage)* 100);
-      return (this.goodsData.price+this.goodsData.postage)* 100;
+      console.log(
+        "Order total:" + (this.goodsData.price + this.goodsData.postage) * 100
+      );
+      return (this.goodsData.price + this.goodsData.postage) * 100;
     },
   },
 };
