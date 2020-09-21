@@ -36,8 +36,8 @@ export default {
       isActive: false,
       searchValue: "",
       isClear: false,
-      pageNum: undefined,
-      pageSize: undefined,
+      pageNum: 0,
+      pageSize: 8,
       isSearch: false,
       loading: false, // 加载中
       finished: false, // 加载完成
@@ -52,7 +52,7 @@ export default {
     console.log("created");
     this.pageNum = 0;
     this.pageSize = 8;
-    this.onLoad();
+    // this.onLoad();
   },
   methods: {
     go(val,val1){
@@ -90,6 +90,9 @@ export default {
         var strs = new Array();
         strs = list[i].image.split(",");
         list[i].image = strs[0];
+        if (list[i].image == "https://file.xiaohuashifu.top/user/avatar/default.png") {
+          list[i].image = "/images/我的/xianyu.jpg";
+        }
         this.productlist.push(list[i]);
         num++;
       }
