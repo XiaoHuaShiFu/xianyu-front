@@ -93,7 +93,6 @@ export default {
       }
       this.pageNum++;
     }
-    console.log(list0);
     this.finished = true;
     this.loading = false;
   },
