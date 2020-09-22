@@ -68,7 +68,8 @@ export default {
   created() {
     this.id = this.$route.query.id;
     console.log("Order create:" + this.id);
-    if (localStorage.getItem("addressId") != "") {
+    if (localStorage.getItem("addressId")) {
+      this.isAddress = true;
       console.log(
         "localStorage.getItem:" + localStorage.getItem("addressName")
       );
@@ -116,6 +117,7 @@ export default {
           this.addresses.id = list0[i].id;
         }
       }
+      console.log("onGetAddress list lenght:"+list0.length);
     },
     /*
     选择地址
@@ -129,6 +131,10 @@ export default {
       );
       if (res.aliPayAccount == null) {
         Notify({ type: "warning", message: "个人信息支付宝未完善" });
+        return;
+      }
+      if (this.isAddress == false) {
+        Notify({ type: "warning", message: "个人信息地址未完善" });
         return;
       }
       let address = await AddressApi.listAddresses({

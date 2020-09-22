@@ -56,6 +56,7 @@
 <script>
 import parseImageString from "./../utils/ParseImage";
 import adaptString from "./../utils/StringUtils";
+import { Notify } from "vant";
 export default {
   data() {
     return {
@@ -77,17 +78,17 @@ export default {
     if (res.status != 404) {
       list0 = res.data.data;
     }
-    
+
     if (list0.length > 0) {
       for (let i = 0; i < list0.length; i++) {
         list0[i].image = parseImageString(list0[i].idle.image);
         list0[i].title = adaptString(list0[i].idle.title, 16);
-        list0[i].isDeliver=false;
+        list0[i].isDeliver = false;
         if (list0[i].status.status2 == "未付款") {
           list0[i].statu = "等待付款";
         } else if (list0[i].status.status3 == "待发售") {
           list0[i].statu = "等待发货";
-          list0[i].isDeliver=true;
+          list0[i].isDeliver = true;
         } else if (list0[i].status.status4 == "待交易") {
           list0[i].statu = "等待完成";
         }
@@ -105,26 +106,24 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    async onPutStatu(item){
-      console.log("onPutStatu:"+item.id);
-      let putOrderJson={
-        id:item.id,
-        status:{
-          status1:'已拍下',
-          status2:'已付款',
-          status3:'已发售',
-          status4:'待交易',
-        }
-      }
-      let config = {
-        headers: {
-            "Content-Type":"application/json"
-        }
-    };
-      let res = await this.$Http.putOrder(putOrderJson,true, config);
+    async onPutStatu(item) {
+      console.log("onPutStatu:" + item.id);
+      let putOrderJson = {
+        id: item.id,
+        status: {
+          status1: "已拍下",
+          status2: "已付款",
+          status3: "已发售",
+          status4: "待交易",
+        },
+      };
+      let res = await this.$Http.putOrder(putOrderJson);
       console.log(res);
-      //
-    }
+      if(res.status== 200){
+        item.isDeliver = false;
+        Notify({ type: "success", message: "完成发货" });
+      }
+    },
   },
 };
 </script>

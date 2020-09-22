@@ -99,6 +99,10 @@ const APIS = {
         method: 'get',
         url: '/v1/comments'
     },
+    postComments:{
+        method: 'post',
+        url: '/v1/comments'
+    },
 }
 
 export default APIS

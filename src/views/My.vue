@@ -52,26 +52,11 @@
           </div>
 
           <!-- Unnamed (矩形) -->
-          <div id="u146" class="ax_default _默认样式">
-            <div id="u146_div" class></div>
-            <div id="u146_text" class="text">
-              <p style="font-size:12px;">
-                <span style="font-family:'微软雅黑', sans-serif;font-weight:400;color:#999999;">收藏</span>
-              </p>
-              <p style="font-size:16px;">
-                <span
-                  style="font-family:'Georgia Negreta', 'Georgia Normal', 'Georgia', sans-serif;font-weight:700;color:#5692CC;"
-                >17</span>
-              </p>
-            </div>
-          </div>
-
-          <!-- Unnamed (矩形) -->
-          <div id="u147" class="ax_default _默认样式">
+          <div id="u147" class="ax_default _默认样式" @click="toCancellation">
             <div id="u147_div" class></div>
             <div id="u147_text" class="text">
               <p>
-                <span>系统设置</span>
+                <span>注销账号</span>
               </p>
             </div>
           </div>
@@ -362,6 +347,14 @@ export default {
     toAddress() {
       this.$router.push("/user/address");
     },
+    /**
+     * 注销账户
+     */
+    toCancellation(){
+      sessionStorage.clear();
+      localStorage.clear();
+       this.$router.push({ path: "/login", query: { toPage: "/home" } });
+    }
   },
 };
 </script>

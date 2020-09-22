@@ -43,7 +43,7 @@
             >
               <van-col span="19">应付金额：{{item.actualPay}}</van-col>
               <van-col span="5" style="color:red" v-if="item.isReceive">
-                <van-button size="small" plain type="info"  @click="onPutStatu(item)">确认收货</van-button>
+                <van-button size="small" plain type="info" @click="onPutStatu(item)">确认收货</van-button>
               </van-col>
             </van-row>
           </van-cell>
@@ -56,6 +56,7 @@
 <script>
 import parseImageString from "./../utils/ParseImage";
 import adaptString from "./../utils/StringUtils";
+import { Notify } from "vant";
 export default {
   data() {
     return {
@@ -79,14 +80,17 @@ export default {
       for (let i = 0; i < list0.length; i++) {
         list0[i].image = parseImageString(list0[i].idle.image);
         list0[i].title = adaptString(list0[i].idle.title, 16);
-        list0[i].isReceive=false;
+        list0[i].isReceive = false;
         if (list0[i].status.status2 == "未付款") {
           list0[i].statu = "等待付款";
         } else if (list0[i].status.status3 == "待发售") {
           list0[i].statu = "等待发货";
         } else if (list0[i].status.status4 == "待交易") {
           list0[i].statu = "等待完成";
-          list0[i].isReceive=true;
+          list0[i].isReceive = true;
+        }
+        else{
+          list0[i].statu = "已经完成";
         }
         this.list.push(list0[i]);
       }
@@ -103,26 +107,24 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
-    async onPutStatu(item){
-      console.log("onPutStatu:"+item.id);
-      let putOrderJson={
-        id:item.id,
-        status:{
-          status1:'已拍下',
-          status2:'已付款',
-          status3:'已发售',
-          status4:'已交易',
-        }
-      }
-      let config = {
-        headers: {
-            "Content-Type": "multipart/form-data"
-        }
-    };
-      let res = await this.$Http.putOrder(putOrderJson,true, config);
+    async onPutStatu(item) {
+      console.log("onPutStatu:" + item.id);
+      let putOrderJson = {
+        id: item.id,
+        status: {
+          status1: "已拍下",
+          status2: "已付款",
+          status3: "已发售",
+          status4: "已交易",
+        },
+      };
+      let res = await this.$Http.putOrder(putOrderJson);
       console.log(res);
-      //
-    }
+      if(res.status== 200){
+        item.isDeliver = false;
+        Notify({ type: "success", message: "完成交易" });
+      }
+    },
   },
 };
 </script>

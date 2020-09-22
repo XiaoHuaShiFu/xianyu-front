@@ -45,8 +45,10 @@ export default {
         pageSize: this.pageSize,
         idleId: this.id,
       });
-      var num=res.data.total;
-      this.msgList=res.data.list;
+      var num=0;
+      for(var i in res.data.list){
+        this.msgList.push(res.data.list[i]);
+      }
       this.loading = false;
       if(num==0){
         this.finished = true;

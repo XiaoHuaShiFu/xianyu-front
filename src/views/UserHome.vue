@@ -29,12 +29,12 @@
           </van-row>
           <van-row>
             <van-col span="12">
-              <van-row style="color:#ccc; ">出售闲置</van-row>
-              <van-row style="color:#669FD1;line-height:30px; font-size:17px;">111</van-row>
+              <van-row style="color:#ccc; "></van-row>
+              <van-row style="color:#669FD1;line-height:30px; font-size:17px;"></van-row>
             </van-col>
             <van-col span="12">
-              <van-row style="color:#ccc; ">卖出闲置</van-row>
-              <van-row style="color:#669FD1;line-height:30px; font-size:17px;">111</van-row>
+              <van-row style="color:#ccc; "></van-row>
+              <van-row style="color:#669FD1;line-height:30px; font-size:17px;"></van-row>
             </van-col>
           </van-row>
           <van-row style="height:15px"></van-row>
