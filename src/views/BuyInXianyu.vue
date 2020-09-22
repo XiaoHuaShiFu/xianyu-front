@@ -42,9 +42,6 @@
               style="border-bottom:1px solid #eee; border-top:1px solid #eee; background:#fff;line-height:40px;font-size:15px"
             >
               <van-col span="19">应付金额：{{item.actualPay}}</van-col>
-              <van-col span="5" style="color:red">
-                <van-button size="small" plain type="info">订单详情</van-button>
-              </van-col>
             </van-row>
           </van-cell>
         </van-list>
