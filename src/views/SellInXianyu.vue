@@ -42,8 +42,8 @@
               style="border-bottom:1px solid #eee; border-top:1px solid #eee; background:#fff;line-height:40px;font-size:15px"
             >
               <van-col span="19">应付金额：{{item.actualPay}}</van-col>
-              <van-col span="5" style="color:red">
-                <van-button size="small" plain type="info">订单详情</van-button>
+              <van-col span="5" style="color:red" v-if="item.isDeliver">
+                <van-button size="small" plain type="info" @click="onPutStatu(item)">确认发货</van-button>
               </van-col>
             </van-row>
           </van-cell>
@@ -82,10 +82,12 @@ export default {
       for (let i = 0; i < list0.length; i++) {
         list0[i].image = parseImageString(list0[i].idle.image);
         list0[i].title = adaptString(list0[i].idle.title, 16);
+        list0[i].isDeliver=false;
         if (list0[i].status.status2 == "未付款") {
           list0[i].statu = "等待付款";
         } else if (list0[i].status.status3 == "待发售") {
           list0[i].statu = "等待发货";
+          list0[i].isDeliver=true;
         } else if (list0[i].status.status4 == "待交易") {
           list0[i].statu = "等待完成";
         }
@@ -103,6 +105,26 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
+    async onPutStatu(item){
+      console.log("onPutStatu:"+item.id);
+      let putOrderJson={
+        id:item.id,
+        status:{
+          status1:'已拍下',
+          status2:'已付款',
+          status3:'已发售',
+          status4:'待交易',
+        }
+      }
+      let config = {
+        headers: {
+            "Content-Type":"application/json"
+        }
+    };
+      let res = await this.$Http.putOrder(putOrderJson,true, config);
+      console.log(res);
+      //
+    }
   },
 };
 </script>

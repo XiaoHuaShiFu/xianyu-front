@@ -90,6 +90,15 @@ const APIS = {
         method: 'post',
         url: '/v1/orders'
     },
+    putOrder:{
+        method: 'put',
+        url: '/v1/orders'
+    },
+    // comments
+    getComments:{
+        method: 'get',
+        url: '/v1/comments'
+    },
 }
 
 export default APIS

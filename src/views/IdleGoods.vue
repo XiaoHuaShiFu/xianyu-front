@@ -4,7 +4,6 @@
     <Tab :id=id></Tab>
     <van-goods-action>
       <van-goods-action-icon icon="chat-o" text="留言" @click="onClickComment" />
-      <van-goods-action-button type="warning" text="收藏" @click="onClickCollection" />
       <van-goods-action-button type="danger" text="购买" @click="onClickBuy" />
     </van-goods-action>
   </div>
@@ -21,6 +20,7 @@ export default {
       titleActive: "",
       id:undefined,
       userId:undefined,
+      detail:"",
     };
   },
   components: {
@@ -45,9 +45,13 @@ export default {
       else {
         this.$router.push({path:'/order',query:{id:this.id}})
       }
+    },
+    onClickComment(){
+      console.log("onClickComment"+this.id+" "+sessionStorage.getItem("id"));
+
     }
   }
 };
 </script>
 <style scoped>
-</style>>
+</style>

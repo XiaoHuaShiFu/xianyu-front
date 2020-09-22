@@ -42,6 +42,9 @@
               style="border-bottom:1px solid #eee; border-top:1px solid #eee; background:#fff;line-height:40px;font-size:15px"
             >
               <van-col span="19">应付金额：{{item.actualPay}}</van-col>
+              <van-col span="5" style="color:red" v-if="item.isReceive">
+                <van-button size="small" plain type="info"  @click="onPutStatu(item)">确认收货</van-button>
+              </van-col>
             </van-row>
           </van-cell>
         </van-list>
@@ -71,16 +74,19 @@ export default {
     this.loading = true;
     let res = await this.$Http.getBuyerOrder({}, false, {}, "/" + this.userId);
     let list0 = res.data.data;
+    console.log(res.data.data);
     if (list0.length > 0) {
       for (let i = 0; i < list0.length; i++) {
         list0[i].image = parseImageString(list0[i].idle.image);
         list0[i].title = adaptString(list0[i].idle.title, 16);
+        list0[i].isReceive=false;
         if (list0[i].status.status2 == "未付款") {
           list0[i].statu = "等待付款";
         } else if (list0[i].status.status3 == "待发售") {
           list0[i].statu = "等待发货";
         } else if (list0[i].status.status4 == "待交易") {
           list0[i].statu = "等待完成";
+          list0[i].isReceive=true;
         }
         this.list.push(list0[i]);
       }
@@ -97,6 +103,26 @@ export default {
     onClickLeft() {
       this.$router.go(-1);
     },
+    async onPutStatu(item){
+      console.log("onPutStatu:"+item.id);
+      let putOrderJson={
+        id:item.id,
+        status:{
+          status1:'已拍下',
+          status2:'已付款',
+          status3:'已发售',
+          status4:'已交易',
+        }
+      }
+      let config = {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    };
+      let res = await this.$Http.putOrder(putOrderJson,true, config);
+      console.log(res);
+      //
+    }
   },
 };
 </script>
