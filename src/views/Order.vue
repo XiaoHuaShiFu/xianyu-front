@@ -105,6 +105,7 @@ export default {
         pageSize: 1,
         userId: sessionStorage.getItem("id"),
       });
+      console.log(res)
       let list0 = res.data.list;
       if (list0.length > 0) {
         this.isAddress = true;
@@ -123,7 +124,6 @@ export default {
       this.$router.push("/user/address");
     },
     async onSubmit() {
-      console.log("dd");
       var res = await UserApi.getUserAndSaveInSessionStorage(
         sessionStorage.getItem("id")
       );
@@ -131,6 +131,11 @@ export default {
         Notify({ type: "warning", message: "个人信息支付宝未完善" });
         return;
       }
+      let address = await AddressApi.listAddresses({
+        pageNum: 1,
+        pageSize: 1,
+        userId: sessionStorage.getItem("id"),
+      });
       res = await this.$Http.postOrder(
         {
           sellerId: this.goodsData.userId,
@@ -140,7 +145,7 @@ export default {
           actualPay: this.goodsData.price + this.goodsData.postage,
           totalPrice: this.goodsData.price,
           aliPayNumber: res.aliPayAccount,
-          addressId: this.addresses.id,
+          addressId: address.data.list[0].id,
         },
       );
       console.log(res);
